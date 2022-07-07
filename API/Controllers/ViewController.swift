@@ -7,15 +7,29 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, DataManagerDelegate {
+    
+    var name: String = "",bday : String = "",occu: [String] = [],status : String = "",nickname: String = "", appearance: [Int] = [],portrayed : String = "",category: String = "", im = UIImage(), id: Int = 0
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var namesTable: UITableView!
     
+    let dataManager = DataManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataManager.delegate = self
         namesTable.delegate = self
         namesTable.dataSource = self
+        dataManager.fetchData()
+    }
+    
+    func didUpdateData(_ dataManager: DataManager, dataa: DataModel) {
+        name = dataa.name; id = dataa.id; bday = dataa.bday; occu = dataa.occu; status = dataa.status; nickname = dataa.nickname; appearance = dataa.appearance; portrayed = dataa.portrayed; category = dataa.category; im = dataa.im
+    
+        DispatchQueue.main.async {
+            self.namesTable.reloadData()
+        }
     }
 
 }
@@ -28,9 +42,18 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = namesTable.dequeueReusableCell(withIdentifier: "nameCell", for: indexPath)
-        //cell.textLabel?.text =
-        return UITableViewCell()
+        cell.textLabel?.text = name
+        return cell
     }
     
     
+}
+
+extension ViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        namesTable.reloadData()
+        
+    }
 }

@@ -13,6 +13,7 @@ protocol DataManagerDelegate{
 }
 
 class DataManager{
+    
     let urlString = "https://www.breakingbadapi.com/api/characters?limit=100"
     
     var delegate : DataManagerDelegate?
