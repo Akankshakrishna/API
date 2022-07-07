@@ -19,10 +19,10 @@ class ViewController: UIViewController, DataManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataManager.delegate = self
-        namesTable.delegate = self
-        namesTable.dataSource = self
+        print("start")
         dataManager.fetchData()
     }
+    
     
     func didUpdateData(_ dataManager: DataManager, dataa: DataModel) {
         name = dataa.name; id = dataa.id; bday = dataa.bday; occu = dataa.occu; status = dataa.status; nickname = dataa.nickname; appearance = dataa.appearance; portrayed = dataa.portrayed; category = dataa.category; im = dataa.im
@@ -49,11 +49,3 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     
 }
 
-extension ViewController: UISearchBarDelegate {
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
-        namesTable.reloadData()
-        
-    }
-}

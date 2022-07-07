@@ -8,13 +8,14 @@
 import Foundation
 import UIKit
 
+
 struct DataInUrl : Codable{
     
     let char_id: Int
     let name: String
     let birthday : String
     let occupation: [String]
-    let imgUrl : String
+    let img : String
     let status : String
     let nickname: String
     let appearance: [Int]

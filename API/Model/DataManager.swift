@@ -14,27 +14,33 @@ protocol DataManagerDelegate{
 
 class DataManager{
     
-    let urlString = "https://www.breakingbadapi.com/api/characters?limit=100"
-    
     var delegate : DataManagerDelegate?
     
     func fetchData(){
+        let urlString = "https://www.breakingbadapi.com/api/characters?limit=100"
+        performRequest(with: urlString)
+    }
+    
+    func performRequest(with urlString: String){
         
         if let url = URL(string: urlString){
             let session = URLSession(configuration: .default)
+            print("Hiiii")
             let task = session.dataTask(with: url) { data, response, error in
+                print("Something")
                 if error != nil {
-                    print(error!)
+                    print("error1 : \(error!)")
                     return
                 }
                 if let safeData = data {
+                    print("Hellooooo")
                     if let dataa = self.parseJSON(safeData){
-                        print(dataa)
+                        print("data we get is \(dataa)")
                         self.delegate?.didUpdateData(self, dataa: dataa)
                     }
                 }
             }
-            
+            task.resume()
         }
         
     }
@@ -42,17 +48,17 @@ class DataManager{
     func parseJSON(_ requestData: Data) -> DataModel? {
         let decoder = JSONDecoder()
         do {
-            let decodedData = try decoder.decode(DataInUrl.self, from: requestData)
-            let id = decodedData.char_id
-            let name = decodedData.name
-            let bday = decodedData.birthday
-            let occu = decodedData.occupation
-            let imageUrl = decodedData.imgUrl
-            let status  = decodedData.status
-            let nickname = decodedData.nickname
-            let appearance = decodedData.appearance
-            let portrayed = decodedData.portrayed
-            let category = decodedData.category
+            let decodedData = try decoder.decode([DataInUrl].self, from: requestData)
+            let id = decodedData[0].char_id
+            let name = decodedData[0].name
+            let bday = decodedData[0].birthday
+            let occu = decodedData[0].occupation
+            let imageUrl = decodedData[0].img
+            let status  = decodedData[0].status
+            let nickname = decodedData[0].nickname
+            let appearance = decodedData[0].appearance
+            let portrayed = decodedData[0].portrayed
+            let category = decodedData[0].category
             
             let image11 = getImage(urlString: imageUrl)
             
@@ -60,7 +66,7 @@ class DataManager{
             return data_required
         }
         catch{
-            print(error)
+            print("error2 is \(error)")
             return nil
         }
     }
