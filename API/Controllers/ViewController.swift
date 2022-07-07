@@ -17,9 +17,6 @@ class ViewController: UIViewController {
         namesTable.delegate = self
         namesTable.dataSource = self
     }
-    
-    
-
 
 }
 

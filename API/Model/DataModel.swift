@@ -9,10 +9,10 @@ import Foundation
 import UIKit
 
 struct DataModel{
-    let char_id: Int
+    let id: Int
     let name: String
-    let birthday : String
-    let occupation: [String]
+    let bday : String
+    let occu: [String]
     let im : UIImage
     let status : String
     let nickname: String
