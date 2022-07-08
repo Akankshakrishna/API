@@ -11,6 +11,8 @@ class ViewController: UIViewController, DataManagerDelegate {
     
 //    var name: String = "",bday : String = "",occu: [String] = [],status : String = "",nickname: String = "", appearance: [Int] = [],portrayed : String = "",category: String = "", im = UIImage(), id: Int = 0
     var names : [String] = []
+    var searchNames : [String] = []
+    var searchActive : Bool = false
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var namesTable: UITableView!
@@ -42,14 +44,54 @@ class ViewController: UIViewController, DataManagerDelegate {
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(searchActive) {
+                    return searchNames.count
+                }
         return names.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = namesTable.dequeueReusableCell(withIdentifier: "nameCell", for: indexPath)
-        cell.textLabel?.text = "\(indexPath.row + 1). \(names[indexPath.row])"
+        //cell.textLabel?.text = "\(indexPath.row + 1). \(names[indexPath.row])"
+        if(searchActive){
+            cell.textLabel?.text = "\(indexPath.row + 1). \(searchNames[indexPath.row])"
+        }
+        else{
+            cell.textLabel?.text = "\(indexPath.row + 1). \(names[indexPath.row])"
+        }
         return cell
     }
     
 }
 
+extension ViewController: UISearchBarDelegate{
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+            searchActive = true
+        }
+       
+        func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+            searchActive = false
+        }
+       
+        func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+            searchActive = false
+        }
+       
+        func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+            searchActive = false
+        }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        searchNames = names.compactMap({ $0 }).filter ({$0.lowercased().contains(searchText.lowercased())})
+        
+        if(searchNames.count == 0){
+            searchActive = false
+        }
+        else {
+            searchActive = true
+        }
+        namesTable.reloadData()
+    }
+}

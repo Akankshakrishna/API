@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D3FD9242878126A00108D63 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3FD9232878126A00108D63 /* DetailsViewController.swift */; };
 		9D62D5D52876A98A0087EC7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D62D5D42876A98A0087EC7D /* AppDelegate.swift */; };
 		9D62D5D72876A98A0087EC7D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D62D5D62876A98A0087EC7D /* SceneDelegate.swift */; };
 		9D62D5D92876A98A0087EC7D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D62D5D82876A98A0087EC7D /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9D3FD9232878126A00108D63 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		9D62D5D12876A98A0087EC7D /* API.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = API.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D62D5D42876A98A0087EC7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D62D5D62876A98A0087EC7D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				9D62D5D82876A98A0087EC7D /* ViewController.swift */,
+				9D3FD9232878126A00108D63 /* DetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 				9D62D5F82876AF200087EC7D /* DataManager.swift in Sources */,
 				9D62D5D92876A98A0087EC7D /* ViewController.swift in Sources */,
 				9D62D5D52876A98A0087EC7D /* AppDelegate.swift in Sources */,
+				9D3FD9242878126A00108D63 /* DetailsViewController.swift in Sources */,
 				9D62D5F32876AEF90087EC7D /* DataInUrl.swift in Sources */,
 				9D62D5D72876A98A0087EC7D /* SceneDelegate.swift in Sources */,
 			);
