@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol DataManagerDelegate{
-    func didUpdateData(_ dataManager: DataManager, dataa: DataModel)
+    func didUpdateData(_ dataManager: DataManager, dataa: [DataModel])
 }
 
 class DataManager{
@@ -25,19 +25,14 @@ class DataManager{
         
         if let url = URL(string: urlString){
             let session = URLSession(configuration: .default)
-            print("Hiiii")
             let task = session.dataTask(with: url) { data, response, error in
-                print("Something")
                 if error != nil {
-                    print("error1 : \(error!)")
                     return
                 }
                 if let safeData = data {
-                    print("Hellooooo")
-                    if let dataa = self.parseJSON(safeData){
-                        print("data we get is \(dataa)")
-                        self.delegate?.didUpdateData(self, dataa: dataa)
-                    }
+                    let dataa = self.parseJSON(safeData)
+                    self.delegate?.didUpdateData(self, dataa: dataa!)
+                    
                 }
             }
             task.resume()
@@ -45,28 +40,35 @@ class DataManager{
         
     }
     
-    func parseJSON(_ requestData: Data) -> DataModel? {
+    func parseJSON(_ requestData: Data) -> [DataModel]? {
         let decoder = JSONDecoder()
+        var data_need = [DataModel]()
         do {
             let decodedData = try decoder.decode([DataInUrl].self, from: requestData)
-            let id = decodedData[0].char_id
-            let name = decodedData[0].name
-            let bday = decodedData[0].birthday
-            let occu = decodedData[0].occupation
-            let imageUrl = decodedData[0].img
-            let status  = decodedData[0].status
-            let nickname = decodedData[0].nickname
-            let appearance = decodedData[0].appearance
-            let portrayed = decodedData[0].portrayed
-            let category = decodedData[0].category
             
-            let image11 = getImage(urlString: imageUrl)
-            
-            let data_required = DataModel(id: id, name: name, bday: bday, occu: occu, im: image11, status: status, nickname: nickname, appearance: appearance, portrayed: portrayed, category: category)
-            return data_required
+            for i in 0...61{
+                
+                let id = decodedData[i].char_id
+                let name = decodedData[i].name
+                let bday = decodedData[i].birthday
+                let occu = decodedData[i].occupation
+                let imageUrl = decodedData[i].img
+                let status  = decodedData[i].status
+                let nickname = decodedData[i].nickname
+                let appearance = decodedData[i].appearance
+                let portrayed = decodedData[i].portrayed
+                let category = decodedData[i].category
+                
+                let image11 = getImage(urlString: imageUrl)
+                
+                let data_required = DataModel(id: id, name: name, bday: bday, occu: occu, im: image11, status: status, nickname: nickname, appearance: appearance, portrayed: portrayed, category: category)
+                            
+                data_need.append(data_required)
+            }
+            return data_need
+//
         }
         catch{
-            print("error2 is \(error)")
             return nil
         }
     }
