@@ -10,7 +10,17 @@ import UIKit
 
 class Utilities{
     
-    var names : [String] = [], finalData : [String] = [], images : [UIImage] = [], bdays : [String] = [], nickNames : [String] = [], statuses : [String] = [], id : [Int] = [], final_data :[DataModel] = [], pq = Int()
+    var names : [String] = [], finalData : [String] = [], images : [UIImage] = [], bdays : [String] = [], nickNames : [String] = [], statuses : [String] = [], id : [Int] = [], final_data :[DataInUrl] = [], pq = Int()
+    
+    func getImage(urlString: String) -> UIImage {
+        var image22 = UIImage()
+        let url = URL(string: urlString)
+        if let data = try? Data(contentsOf: url!)
+        {
+            image22 = UIImage(data: data)!
+        }
+        return image22
+    }
     
 }
 

@@ -16,16 +16,17 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var status: UILabel!
     @IBOutlet weak var nickname: UILabel!
     
-    var name_: String = "",bday_ : String = "",occu_: [String] = [],status_ : String = "",nickname_: String = "", appearance_: [Int] = [],portrayed_ : String = "",category_: String = "", im_ = UIImage(), id_: Int = 0
+   let utilities = Utilities()
+   var retrivedData = DataInUrl(char_id: 0, name: "", birthday: "", occupation: [], img: "", status: "", nickname: "", appearance: [], portrayed: "", category: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        profile_pic.image = im_
-        id.text = "ID: \(id_)"
-        name.text = "Name: \(name_)"
-        bday.text = "Birthday: \(bday_)"
-        status.text = "Status: \(status_)"
-        nickname.text = "NickName: \(nickname_)"
+        profile_pic.image = utilities.getImage(urlString: retrivedData.img)
+        id.text = "ID: \(retrivedData.char_id)"
+        name.text = "Name: \(retrivedData.name)"
+        bday.text = "Birthday: \(retrivedData.birthday)"
+        status.text = "Status: \(retrivedData.status)"
+        nickname.text = "NickName: \(retrivedData.nickname)"
     }
 
 

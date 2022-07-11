@@ -25,22 +25,12 @@ class ViewController: UIViewController, DataManagerDelegate {
     }
     
     
-    func didUpdateData(_ dataManager: DataManager, dataa: [DataModel]) {
-        
-        for i in 0...dataa.count - 1 {
-            
-            utilities.names.append(dataa[i].name)
-            utilities.images.append(dataa[i].im)
-            utilities.id.append(dataa[i].id)
-            utilities.nickNames.append(dataa[i].nickname)
-            utilities.bdays.append(dataa[i].bday)
-            utilities.statuses.append(dataa[i].status)
-            
+    func didUpdateData(_ dataManager: DataManager, dataa: [DataInUrl]) {
+        for everyData in dataa{
+            utilities.names.append(everyData.name)
         }
         utilities.finalData = utilities.names
         utilities.final_data = dataa
-        
-    
         DispatchQueue.main.async {
             self.namesTable.reloadData()
         }
@@ -69,9 +59,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
                 break
             }
         }
-        
-        vc.name_ = utilities.names[utilities.pq]; vc.im_ = utilities.images[utilities.pq]; vc.id_ = utilities.id[utilities.pq]; vc.nickname_ = utilities.nickNames[utilities.pq]; vc.bday_ =  utilities.bdays[utilities.pq]; vc.status_ = utilities.statuses[utilities.pq]
-        
+        vc.retrivedData = utilities.final_data[utilities.pq]
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

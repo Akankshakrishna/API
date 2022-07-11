@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol DataManagerDelegate{
-    func didUpdateData(_ dataManager: DataManager, dataa: [DataModel])
+    func didUpdateData(_ dataManager: DataManager, dataa: [DataInUrl])
 }
 
 class DataManager{
@@ -40,38 +40,17 @@ class DataManager{
         
     }
     
-    func parseJSON(_ requestData: Data) -> [DataModel]? {
+    func parseJSON(_ requestData: Data) -> [DataInUrl]? {
         let decoder = JSONDecoder()
-        var data_need = [DataModel]()
         do {
             let decodedData = try decoder.decode([DataInUrl].self, from: requestData)
-            
-            for i in 0...decodedData.count - 1 {
-                
-                let id = decodedData[i].char_id, name = decodedData[i].name, bday = decodedData[i].birthday, occu = decodedData[i].occupation, imageUrl = decodedData[i].img, status  = decodedData[i].status, nickname = decodedData[i].nickname, appearance = decodedData[i].appearance, portrayed = decodedData[i].portrayed, category = decodedData[i].category
-                
-                let image11 = getImage(urlString: imageUrl)
-                
-                let data_required = DataModel(id: id, name: name, bday: bday, occu: occu, im: image11, status: status, nickname: nickname, appearance: appearance, portrayed: portrayed, category: category)
-                            
-                data_need.append(data_required)
-            }
-            return data_need
-//
+            return decodedData
         }
         catch{
             return nil
         }
     }
     
-    func getImage(urlString: String) -> UIImage {
-        var image22 = UIImage()
-        let url = URL(string: urlString)
-        if let data = try? Data(contentsOf: url!)
-        {
-            image22 = UIImage(data: data)!
-        }
-        return image22
-    }
+    
 }
 
