@@ -10,14 +10,6 @@ import UIKit
 
 class Utilities{
     
-    var names : [String] = []
-    var finalData : [String] = []
-    var images : [UIImage] = []
-    var bdays : [String] = []
-    var nickNames : [String] = []
-    var statuses : [String] = []
-    var id : [Int] = []
-    var final_data :[DataModel] = []
-    var pq = Int()
+    var names : [String] = [], finalData : [String] = [], images : [UIImage] = [], bdays : [String] = [], nickNames : [String] = [], statuses : [String] = [], id : [Int] = [], final_data :[DataModel] = [], pq = Int()
     
 }

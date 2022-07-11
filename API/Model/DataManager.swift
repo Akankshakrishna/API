@@ -46,18 +46,9 @@ class DataManager{
         do {
             let decodedData = try decoder.decode([DataInUrl].self, from: requestData)
             
-            for i in 0...61{
+            for i in 0...decodedData.count - 1 {
                 
-                let id = decodedData[i].char_id
-                let name = decodedData[i].name
-                let bday = decodedData[i].birthday
-                let occu = decodedData[i].occupation
-                let imageUrl = decodedData[i].img
-                let status  = decodedData[i].status
-                let nickname = decodedData[i].nickname
-                let appearance = decodedData[i].appearance
-                let portrayed = decodedData[i].portrayed
-                let category = decodedData[i].category
+                let id = decodedData[i].char_id, name = decodedData[i].name, bday = decodedData[i].birthday, occu = decodedData[i].occupation, imageUrl = decodedData[i].img, status  = decodedData[i].status, nickname = decodedData[i].nickname, appearance = decodedData[i].appearance, portrayed = decodedData[i].portrayed, category = decodedData[i].category
                 
                 let image11 = getImage(urlString: imageUrl)
                 
