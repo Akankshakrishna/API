@@ -7,10 +7,10 @@
 
 import UIKit
 class ViewController: UIViewController, DataManagerDelegate {
-    let utilities = Utilities()
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var namesTable: UITableView!
     let dataManager = DataManager()
+    let utilities = Utilities()
     override func viewDidLoad() {
         super.viewDidLoad()
         namesTable.rowHeight = 50.0
@@ -19,9 +19,7 @@ class ViewController: UIViewController, DataManagerDelegate {
         dataManager.fetchData()
     }
     func didUpdateData(_ dataManager: DataManager, dataa: [DataInUrl]) {
-        for everyData in dataa {
-            utilities.names.append(everyData.name ?? "")
-        }
+        utilities.names = dataa.map { $0.name ?? "" }
         utilities.allNames = utilities.names
         utilities.finalData = dataa
         DispatchQueue.main.async {
@@ -29,7 +27,6 @@ class ViewController: UIViewController, DataManagerDelegate {
         }
     }
 }
-
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return utilities.allNames.count
