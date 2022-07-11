@@ -6,16 +6,11 @@
 //
 
 import UIKit
-
 class ViewController: UIViewController, DataManagerDelegate {
-    
     let utilities = Utilities()
-
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var namesTable: UITableView!
-    
     let dataManager = DataManager()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         namesTable.rowHeight = 50.0
@@ -23,53 +18,42 @@ class ViewController: UIViewController, DataManagerDelegate {
         dataManager.delegate = self
         dataManager.fetchData()
     }
-    
-    
     func didUpdateData(_ dataManager: DataManager, dataa: [DataInUrl]) {
-        for everyData in dataa{
-            utilities.names.append(everyData.name)
+        for everyData in dataa {
+            utilities.names.append(everyData.name ?? "")
         }
-        utilities.finalData = utilities.names
-        utilities.final_data = dataa
+        utilities.allNames = utilities.names
+        utilities.finalData = dataa
         DispatchQueue.main.async {
             self.namesTable.reloadData()
         }
     }
-
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource{
-    
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return utilities.finalData.count
+        return utilities.allNames.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = namesTable.dequeueReusableCell(withIdentifier: "nameCell", for: indexPath)
-        cell.textLabel?.text = "\(utilities.finalData[indexPath.row])"
+        cell.textLabel?.text = "\(utilities.allNames[indexPath.row])"
         return cell
     }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
-        
-        for i in 0...utilities.final_data.count - 1 {
-            if utilities.finalData[indexPath.row] == utilities.final_data[i].name {
-                utilities.pq = i
+        let secondVc = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController
+        for index in 0...utilities.finalData.count - 1 {
+            if utilities.allNames[indexPath.row] == utilities.finalData[index].name {
+                utilities.index = index
                 break
             }
         }
-        vc.retrivedData = utilities.final_data[utilities.pq]
-        self.navigationController?.pushViewController(vc, animated: true)
+        secondVc?.retrivedData = utilities.finalData[utilities.index]
+        self.navigationController?.pushViewController(secondVc!, animated: true)
     }
-    
 }
-
-extension ViewController: UISearchBarDelegate{
-
+extension ViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        utilities.finalData = searchText.isEmpty ? utilities.names : utilities.names.filter({ $0.contains(searchText)})
+        utilities.allNames = searchText.isEmpty ? utilities.names : utilities.names.filter({ $0.range(of: searchText, options: .caseInsensitive) != nil })
             namesTable.reloadData()
     }
 }
