@@ -11,7 +11,7 @@ class Utilities {
     var names: [String] = []
     var allNames: [String] = []
     var finalData: [DataInUrl] = []
-    var index = Int()
+    var index = [Int]()
     func getImage(urlString: String) -> UIImage {
         var image22 = UIImage()
         let url = URL(string: urlString)
@@ -19,6 +19,14 @@ class Utilities {
             image22 = UIImage(data: data)!
         }
         return image22
+    }
+    func getOnlyNames(_ dataa: [DataInUrl]) {
+        names = dataa.map { $0.name ?? "" }
+        allNames = names
+        finalData = dataa
+    }
+    func compareWithSearchName(indexPath: Int) {
+        index = finalData.enumerated().filter({ $0.element.name == allNames[indexPath]}).map({ $0.offset })
     }
 }
 extension UIView {

@@ -17,7 +17,6 @@
 		9D62D5E12876A98B0087EC7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D62D5DF2876A98B0087EC7D /* LaunchScreen.storyboard */; };
 		9D62D5F32876AEF90087EC7D /* DataInUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D62D5F22876AEF90087EC7D /* DataInUrl.swift */; };
 		9D62D5F82876AF200087EC7D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D62D5F72876AF200087EC7D /* DataManager.swift */; };
-		9D77E889287D4CC900AC8148 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D77E888287D4CC900AC8148 /* UIViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,6 @@
 		9D62D5E22876A98B0087EC7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D62D5F22876AEF90087EC7D /* DataInUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInUrl.swift; sourceTree = "<group>"; };
 		9D62D5F72876AF200087EC7D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		9D77E888287D4CC900AC8148 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +66,6 @@
 			children = (
 				9D62D5D42876A98A0087EC7D /* AppDelegate.swift */,
 				9D62D5D62876A98A0087EC7D /* SceneDelegate.swift */,
-				9D77E888287D4CC900AC8148 /* UIViewExtension.swift */,
 				9D62D5F42876AEFE0087EC7D /* Model */,
 				9D62D5F12876AEDA0087EC7D /* Controllers */,
 				9D62D5F02876AEC60087EC7D /* View */,
@@ -205,7 +202,6 @@
 				9D3FD9242878126A00108D63 /* DetailsViewController.swift in Sources */,
 				9D62D5F32876AEF90087EC7D /* DataInUrl.swift in Sources */,
 				9D3FD9262878454700108D63 /* Utilities.swift in Sources */,
-				9D77E889287D4CC900AC8148 /* UIViewExtension.swift in Sources */,
 				9D62D5D72876A98A0087EC7D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
