@@ -13,15 +13,11 @@ class ViewController: UIViewController, DataManagerDelegate {
     let utilities = Utilities()
     override func viewDidLoad() {
         super.viewDidLoad()
-        namesTable.rowHeight = 50.0
-        namesTable.separatorStyle = .none
         dataManager.delegate = self
         dataManager.fetchData()
     }
     func didUpdateData(_ dataManager: DataManager, dataa: [DataInUrl]) {
-        utilities.names = dataa.map { $0.name ?? "" }
-        utilities.allNames = utilities.names
-        utilities.finalData = dataa
+        utilities.getOnlyNames(dataa)
         DispatchQueue.main.async {
             self.namesTable.reloadData()
         }
@@ -38,13 +34,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let secondVc = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController
-        for index in 0...utilities.finalData.count - 1 {
-            if utilities.allNames[indexPath.row] == utilities.finalData[index].name {
-                utilities.index = index
-                break
-            }
-        }
-        secondVc?.retrivedData = utilities.finalData[utilities.index]
+        utilities.compareWithSearchName(indexPath: indexPath.row)
+        secondVc?.retrivedData = utilities.finalData[utilities.index[0]]
         self.navigationController?.pushViewController(secondVc!, animated: true)
     }
 }
